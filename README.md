@@ -48,6 +48,7 @@ murl [flags] <software> <command>
 
 - `list` - Lists the available versions for the specified software.
   - `-unstable` - Include unstable versions in the list if applicable.
+- `install <version>` - Install the specific version
 
 ### Example Usage
 

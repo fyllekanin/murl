@@ -8,6 +8,7 @@ import (
 )
 
 func List(software softwares.Software, includeUnstable bool) {
+	fmt.Println("Running list...")
 	result, err := software.List()
 
 	if err != nil {
@@ -22,6 +23,16 @@ func List(software softwares.Software, includeUnstable bool) {
 			continue
 		}
 		fmt.Printf("%-15s %s%s%s\n", item.Name, getStableValue(item), getInstalledValue(item), getLtsValue(item))
+	}
+}
+
+func Install(software softwares.Software, version string) {
+	fmt.Println("Running install...")
+
+	err := software.Install(version)
+	if err != nil {
+		fmt.Printf("Failed to install the version %s for %s\n", version, software.Name())
+		return
 	}
 }
 

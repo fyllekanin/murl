@@ -36,6 +36,10 @@ func main() {
 	switch flag.Args()[1] {
 	case "list":
 		commands.List(software, getBoolValue(includeUnstable))
+	case "install":
+		commands.Install(software, flag.Args()[2])
+	default:
+		fmt.Printf("Unknown command: \"%s\"\n", flag.Args()[1])
 	}
 }
 

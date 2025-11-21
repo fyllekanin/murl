@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"runtime"
 
 	"github.com/fyllekanin/murl/internal/persistance"
@@ -25,6 +26,15 @@ type Golang struct{}
 
 func (s *Golang) Name() string {
 	return "go"
+}
+
+func (s *Golang) Install(version string) error {
+	fmt.Println("Downloading file to /tmp/")
+	if err := s.downloadFile(version); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (s *Golang) List() ([]SoftwareVersion, error) {
@@ -65,6 +75,24 @@ func (s *Golang) isVersionApplicable(version GoLangVersion) bool {
 		}
 	}
 	return false
+}
+
+func (s *Golang) downloadFile(version string) error {
+	var versionPackage = fmt.Sprintf("%s.linux-386.tar.gz", version)
+	response, err := http.Get(fmt.Sprintf("https://go.dev/dl/%s", versionPackage))
+	if err != nil {
+		return errors.New("failed to fetch the file")
+	}
+	defer response.Body.Close()
+
+	out, err := os.Create(fmt.Sprintf("/tmp/%s", versionPackage))
+	if err != nil {
+		return err
+	}
+	defer out.Close()
+
+	_, err = io.Copy(out, response.Body)
+	return err
 }
 
 func NewGoLang() Software {

@@ -13,4 +13,6 @@ type Software interface {
 	Name() string
 	// list of versions in decending order
 	List() ([]SoftwareVersion, error)
+
+	Install(version string) error
 }

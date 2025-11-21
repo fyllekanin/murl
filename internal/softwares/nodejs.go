@@ -39,6 +39,11 @@ func (s *NodeJs) Name() string {
 	return "nodejs"
 }
 
+func (s *NodeJs) Install(version string) error {
+	// empty
+	return nil
+}
+
 func (s *NodeJs) List() ([]SoftwareVersion, error) {
 	resp, err := http.Get("https://nodejs.org/dist/index.json")
 	if err != nil {
