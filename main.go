@@ -1,15 +1,33 @@
 package main
 
 import (
-	"flag"
 	"fmt"
-	"strings"
+	"os"
 
-	"github.com/fyllekanin/murl/internal/commands"
-	"github.com/fyllekanin/murl/internal/softwares"
+	tea "github.com/charmbracelet/bubbletea"
+	"github.com/fyllekanin/murl/internal/tui"
 )
 
 func main() {
+
+	startup := tea.NewProgram(tui.StartUpModel{})
+
+	m, err := startup.Run()
+	if err != nil {
+		fmt.Println("Error:", err)
+		os.Exit(1)
+	}
+
+	if m, ok := m.(tui.StartUpModel); ok {
+		if m.IsQuitting {
+			fmt.Println("Quitting...")
+		} else {
+			fmt.Println("You selected " + m.GetSelection().Name())
+		}
+		os.Exit(1)
+	}
+
+	/**
 	includeUnstable := flag.Bool("unstable", false, "Include unstable versions")
 	flag.Parse()
 
@@ -41,11 +59,14 @@ func main() {
 	default:
 		fmt.Printf("Unknown command: \"%s\"\n", flag.Args()[1])
 	}
+	*/
 }
 
+/**
 func getBoolValue(b *bool) bool {
 	if b != nil {
 		return *b
 	}
 	return false
 }
+*/
