@@ -9,6 +9,7 @@ import (
 )
 
 func main() {
+<<<<<<< Updated upstream
 
 	startup := tea.NewProgram(tui.StartUpModel{})
 
@@ -30,37 +31,32 @@ func main() {
 	/**
 	includeUnstable := flag.Bool("unstable", false, "Include unstable versions")
 	flag.Parse()
+=======
+	app := tui.NewAppModel()
+	p := tea.NewProgram(app)
+>>>>>>> Stashed changes
 
-	argCount := len(flag.Args())
-	items := make(map[string]softwares.Software)
-	items["go"] = softwares.NewGoLang()
-	items["nodejs"] = softwares.NewNodeJs()
-
-	if argCount < 1 {
-		fmt.Println("No arguments provided, try \"help\" to see usage")
-		return
-	}
-	if strings.ToLower(flag.Args()[0]) == "help" {
-		commands.Help()
-		return
+	m, err := p.Run()
+	if err != nil {
+		fmt.Println("Error:", err)
+		os.Exit(1)
 	}
 
-	software, ok := items[strings.ToLower(flag.Args()[0])]
-	if !ok {
-		fmt.Println("Software " + flag.Args()[0] + " is not suported")
-		return
-	}
+	if m, ok := m.(*tui.AppModel); ok {
+		if m.IsQuitting || m.Software == nil || m.Operation == "" {
+			fmt.Println("Quitting...")
+			os.Exit(0)
+		}
 
-	switch flag.Args()[1] {
-	case "list":
-		commands.List(software, getBoolValue(includeUnstable))
-	case "install":
-		commands.Install(software, flag.Args()[2])
-	default:
-		fmt.Printf("Unknown command: \"%s\"\n", flag.Args()[1])
+		switch m.Operation {
+		case "install":
+			// Need to get version to install
+			fmt.Println("Install not yet implemented in TUI")
+		}
 	}
 	*/
 }
+<<<<<<< Updated upstream
 
 /**
 func getBoolValue(b *bool) bool {
@@ -70,3 +66,5 @@ func getBoolValue(b *bool) bool {
 	return false
 }
 */
+=======
+>>>>>>> Stashed changes

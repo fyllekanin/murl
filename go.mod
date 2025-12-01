@@ -4,6 +4,10 @@ go 1.24.4
 
 require (
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
+<<<<<<< Updated upstream
+=======
+	github.com/charmbracelet/bubbles v0.21.0 // indirect
+>>>>>>> Stashed changes
 	github.com/charmbracelet/bubbletea v1.3.10 // indirect
 	github.com/charmbracelet/colorprofile v0.3.3 // indirect
 	github.com/charmbracelet/lipgloss v1.1.0 // indirect
