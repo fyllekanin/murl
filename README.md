@@ -9,6 +9,8 @@ Murl is a command-line tool designed to help manage software versions available 
 - List available stable and unstable versions for supported software.
 - Simple CLI interface.
 
+TEST
+
 ## Installation
 
 ### Prerequisites
