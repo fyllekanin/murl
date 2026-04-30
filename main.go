@@ -9,6 +9,10 @@ import (
 )
 
 func main() {
+
+
+
+	
 <<<<<<< Updated upstream
 
 	startup := tea.NewProgram(tui.StartUpModel{})
